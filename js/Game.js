@@ -57,6 +57,8 @@ class Game {
   won
   */
   checkForWin() {
+    // TO DO  fix... this is based on the rest of the game being completed... is there another way to write this?
+
     if (document.querySelectorAll('.letter.hide')) {
       return false;
     }

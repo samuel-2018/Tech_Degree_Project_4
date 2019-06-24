@@ -13,7 +13,16 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
 function handleInteraction(button) {
   const letter = button.innerText;
   if (game.activePhrase.checkLetter(letter)) {
+    button.classList.remove('key');
+    button.classList.add('chosen');
+    game.activePhrase.showMatchedLetter(letter);
+    if (game.checkForWin()) {
+      game.gameOver(true);
+    }
   } else {
+    button.classList.remove('key');
+    button.classList.add('wrong');
+    game.removeLife();
   }
 
   // button.classList.add('test');
