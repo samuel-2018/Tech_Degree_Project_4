@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
@@ -29,5 +30,27 @@ class Phrase {
     targetElement.innerHTML = '';
     // Adds the new ul.
     targetElement.appendChild(ul);
+  }
+
+  /**
+   * Checks if passed letter is in phrase
+   * @param (string) letter - Letter to check
+   */
+  checkLetter(letter) {
+    if (this.phrase.includes(letter)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Displays passed letter on screen after a match is found
+   * @param (string) letter - Letter to display
+   */
+  showMatchedLetter(letter) {
+    document.querySelectorAll(`.${letter}`).forEach((element) => {
+      element.classList.remove('hide');
+      element.classList.add('show');
+    });
   }
 }

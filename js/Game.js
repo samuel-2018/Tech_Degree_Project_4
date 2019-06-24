@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
@@ -49,4 +50,51 @@ class Game {
     // Displays to user.
     this.activePhrase.addPhraseToDisplay();
   }
+
+  /**
+  * Checks for winning move
+  * @return {boolean} True if game has been won, false if game wasn't
+  won
+  */
+  checkForWin() {
+    if (document.querySelectorAll('.letter.hide')) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Increases the value of the missed property
+   * Removes a life from the scoreboard
+   * Checks if player has remaining lives and ends game if player is out
+   */
+  removeLife() {
+    // Gets array of all heart elements.
+    const heartElements = document.querySelectorAll('.tries img');
+    // Changes a live heart to a lost heart.
+    heartElements[this.missed].src = 'images/lostHeart.png';
+    this.missed++;
+    if (this.missed === 5) {
+      this.gameOver(false);
+    }
+  }
+
+  /**
+   * Displays game over message
+   * @param {boolean} gameWon - Whether or not the user won the game
+   */
+  gameOver(gameWon) {
+    const overlayDiv = document.querySelector('#overlay');
+    // Shows the overlay, showing the start screen.
+    overlayDiv.style.display = '';
+    if (gameWon) {
+      document.querySelector('h1').innerText = 'You Win!';
+      document.querySelector('#overlay').className = 'win';
+    } else {
+      document.querySelector('h1').innerText = 'You Lose!';
+      document.querySelector('#overlay').className = 'lose';
+    }
+  }
+
+  handleInteraction() {}
 }
