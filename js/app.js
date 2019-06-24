@@ -39,8 +39,6 @@ document.querySelector('#qwerty').addEventListener('click', (event) => {
     handleInteraction(button);
   }
 });
-// Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array)
-const keyElements = Array.from(document.querySelectorAll('.key'));
 
 // Listens for physical keyboard clicks.
 document.addEventListener('keyup', (event) => {
@@ -50,6 +48,9 @@ document.addEventListener('keyup', (event) => {
   const isValidKey = /^[a-zA-Z]$/.test(letter);
 
   if (isValidKey) {
+    // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array)
+    // Note: This array must be generated inside if state so that the list is up-to-date.
+    const keyElements = Array.from(document.querySelectorAll('.key'));
     // Gets matching element from full list of keys.
     const button = keyElements.filter(element => element.innerText === letter)[0];
     handleInteraction(button);
