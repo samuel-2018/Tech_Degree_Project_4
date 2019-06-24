@@ -94,5 +94,18 @@ class Game {
       document.querySelector('h1').innerText = 'You Lose!';
       document.querySelector('#overlay').className = 'lose';
     }
+    // Clears old phrase from game.
+    document.querySelector('#phrase > ul').innerHTML = '';
+
+    // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array)
+    const keyElements = Array.from(document.querySelectorAll('#qwerty button'));
+    // Clears classes from buttons and replaces them with 'key'.
+    keyElements.forEach(key => (key.className = 'key'));
+
+    // RESETS HEARTS
+    // Gets array of all heart elements.
+    const heartElements = Array.from(document.querySelectorAll('.tries img'));
+    // Sets all hearts as live.
+    heartElements.forEach(heart => (heart.src = 'images/liveHeart.png'));
   }
 }
