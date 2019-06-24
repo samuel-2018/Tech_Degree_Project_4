@@ -95,6 +95,4 @@ class Game {
       document.querySelector('#overlay').className = 'lose';
     }
   }
-
-  handleInteraction() {}
 }
