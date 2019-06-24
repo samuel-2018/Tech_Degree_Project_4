@@ -11,12 +11,21 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
  * @param (HTMLButtonElement) button - The clicked button element
  */
 function handleInteraction(button) {
-  button.classList.add('test');
-  console.log(button);
+  const letter = button.innerText;
+  if (game.activePhrase.checkLetter(letter)) {
+  } else {
+  }
+
+  // button.classList.add('test');
+  console.log('handleInteraction ran:  ', button);
 }
 // Listens for onscreen keyboard clicks.
+
 document.querySelector('#qwerty').addEventListener('click', (event) => {
   const button = event.target;
+  // Note: 'enter' and 'space' both trigger clicks on any in focus buttons.
+  // blur() removes the focus after click.
+  button.blur();
   if (button.className === 'key') {
     handleInteraction(button);
   }
@@ -27,9 +36,15 @@ const keyElements = Array.from(document.querySelectorAll('.key'));
 // Listens for physical keyboard clicks.
 document.addEventListener('keyup', (event) => {
   const letter = event.key;
-  // Gets matching element from full list of keys.
-  const button = keyElements.filter(element => element.innerText === letter)[0];
-  handleInteraction(button);
+
+  // Checks for valid key press.
+  const isValidKey = /^[a-zA-Z]$/.test(letter);
+
+  if (isValidKey) {
+    // Gets matching element from full list of keys.
+    const button = keyElements.filter(element => element.innerText === letter)[0];
+    handleInteraction(button);
+  }
 });
 
 // // Listens for onscreen keyboard clicks.
