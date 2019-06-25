@@ -7,6 +7,8 @@ class Game {
     this.missed = 0;
     this.phrases = this.createPhrases();
     this.activePhrase = null;
+    // Set to false to lockout keyboard presses until 'start' is clicked.
+    this.gameReady = false;
   }
 
   /**
@@ -40,6 +42,7 @@ class Game {
    * Begins game by selecting a random phrase and displaying it to user
    */
   startGame() {
+    this.gameReady = true;
     const overlayDiv = document.querySelector('#overlay');
     // Hides the overlay, showing the game screen.
     overlayDiv.style.display = 'none';
@@ -84,6 +87,9 @@ class Game {
    * @param {boolean} gameWon - Whether or not the user won the game
    */
   gameOver(gameWon) {
+    // Locks out keypresses when overlay is shown.
+    this.gameReady = false;
+
     const overlayDiv = document.querySelector('#overlay');
     // Shows the overlay, showing the start screen.
     overlayDiv.style.display = '';
