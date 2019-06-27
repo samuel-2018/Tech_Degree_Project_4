@@ -97,40 +97,46 @@ class Game {
    * @param {boolean} gameWon - Whether or not the user won the game
    */
   gameOver(gameWon) {
+    const outerThis = this;
+
     // Locks out keypresses when overlay is shown.
     this.gameReady = false;
 
-    // Clears animation from title (so animation only shows first time)
-    document.querySelector('.title').classList.remove('rubberBand');
+    setTimeout(showOverlay, 1000);
 
-    // Shows the overlay.
-    const overlayDiv = document.querySelector('#overlay');
-    overlayDiv.style.display = '';
+    function showOverlay() {
+      // Clears animation from title (so animation only shows first time)
+      document.querySelector('.title').classList.remove('rubberBand');
 
-    if (gameWon) {
-      this.soundWin.play();
-      document.querySelector('h1').className = 'animated tada';
-      document.querySelector('h1').innerText = "You're the winner!";
-      document.querySelector('#overlay').className = 'win';
-    } else {
-      this.soundLose.play();
-      document.querySelector('h1').className = 'animated flash';
-      document.querySelector('h1').innerText = 'Too bad!';
-      document.querySelector('#overlay').className = 'lose';
+      // Shows the overlay.
+      const overlayDiv = document.querySelector('#overlay');
+      overlayDiv.style.display = '';
+
+      if (gameWon) {
+        outerThis.soundWin.play();
+        document.querySelector('h1').className = 'animated tada';
+        document.querySelector('h1').innerText = "You're the winner!";
+        document.querySelector('#overlay').className = 'win';
+      } else {
+        outerThis.soundLose.play();
+        document.querySelector('h1').className = 'animated flash';
+        document.querySelector('h1').innerText = 'Too bad!';
+        document.querySelector('#overlay').className = 'lose';
+      }
+      // Clears old phrase from game.
+      document.querySelector('#phrase > ul').innerHTML = '';
+
+      // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array.)
+      const keyElements = Array.from(document.querySelectorAll('#qwerty button'));
+
+      // Clears classes from buttons and replaces them with 'key'.
+      keyElements.forEach(key => (key.className = 'key'));
+
+      // RESETS HEARTS
+      // Gets array of all heart elements.
+      const heartElements = Array.from(document.querySelectorAll('.tries img'));
+      // Sets all hearts as live.
+      heartElements.forEach(heart => (heart.src = 'images/liveHeart.png'));
     }
-    // Clears old phrase from game.
-    document.querySelector('#phrase > ul').innerHTML = '';
-
-    // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array.)
-    const keyElements = Array.from(document.querySelectorAll('#qwerty button'));
-
-    // Clears classes from buttons and replaces them with 'key'.
-    keyElements.forEach(key => (key.className = 'key'));
-
-    // RESETS HEARTS
-    // Gets array of all heart elements.
-    const heartElements = Array.from(document.querySelectorAll('.tries img'));
-    // Sets all hearts as live.
-    heartElements.forEach(heart => (heart.src = 'images/liveHeart.png'));
   }
 }
