@@ -4,7 +4,7 @@ Project 4: OOP Game Show App (Tech Degree)
 
 ## Description
 
-Using the provided HTML and CSS files, I added JavaScript to provide the logic for "Phrase Hunter." This is a game in which the player tries to guess a random phrase. Each time a correct letter is chosen, those matching letters from the phrase are revealed. A wrong chose results in losing one of the five hearts. To win, the player must guess all off the letters before running out of hearts.
+Using the provided HTML and CSS files, I added JavaScript to provide the logic for "Phrase Hunter." This is a game in which the player tries to guess a random phrase. Each time a correct letter is chosen, those matching letters from the phrase are revealed. A wrong choice results in losing one of the five hearts. To win, the player must guess all off the letters before running out of hearts.
 
 ## “Extra Credit” Features
 
