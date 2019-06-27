@@ -12,6 +12,10 @@ class Game {
     // Set to false to lockout keyboard presses until 'start' is clicked.
     this.gameReady = false;
 
+    /**
+     * 'Universal Sound FX' licensed from Imphenzia.
+     * https://www.imphenzia.com/terms-and-conditions
+     */
     // Sound effects
     this.soundClickRight = new Audio('sounds/8BIT_RETRO_Coin_Collect_mono.wav');
     this.soundClickWrong = new Audio('sounds/DROP_Designed_mono.wav');
