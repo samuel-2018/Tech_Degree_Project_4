@@ -10,22 +10,6 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
   game.startGame();
 });
 
-// Still does not work correctly upon page refresh.....
-// Plays on first load (after user moves mouse).
-function soundIntro() {
-  const soundBattle = new Audio('sounds/MUSIC_EFFECT_Orchestral_Battle_Neutral_stereo.wav');
-  soundBattle.play();
-
-  // Plays sound after 3 seconds: "Let's play!"
-  const soundLetsPlay = new Audio('sounds/VOICE_Girl_4yo_Lets_Play_03.wav');
-  setTimeout(() => {
-    soundLetsPlay.play();
-  }, 3000);
-  // Removes listener to avoid playing sound again.
-  document.removeEventListener('mouseover', soundIntro);
-}
-document.addEventListener('mouseover', soundIntro);
-
 /**
  * Handles onscreen keyboard button clicks
  * @param (HTMLButtonElement) button - The clicked button element
