@@ -1,17 +1,30 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
+
 let game;
+
+// Starts game upon click.
 document.querySelector('#btn__reset').addEventListener('click', () => {
   game = new Game();
   game.startGame();
 });
 
-// On first load, plays sound after 3 seconds: "Let's play!"
-const soundLetsPlay = new Audio('sounds/VOICE_Girl_4yo_Lets_Play_03.wav');
-setTimeout(() => {
-  soundLetsPlay.play();
-}, 3000);
+// Still does not work correctly upon page refresh.....
+// Plays on first load (after user moves mouse).
+function soundIntro() {
+  const soundBattle = new Audio('sounds/MUSIC_EFFECT_Orchestral_Battle_Neutral_stereo.wav');
+  soundBattle.play();
+
+  // Plays sound after 3 seconds: "Let's play!"
+  const soundLetsPlay = new Audio('sounds/VOICE_Girl_4yo_Lets_Play_03.wav');
+  setTimeout(() => {
+    soundLetsPlay.play();
+  }, 3000);
+  // Removes listener to avoid playing sound again.
+  document.removeEventListener('mouseover', soundIntro);
+}
+document.addEventListener('mouseover', soundIntro);
 
 /**
  * Handles onscreen keyboard button clicks
@@ -46,8 +59,11 @@ function handleInteraction(button) {
 // Listens for onscreen keyboard clicks.
 document.querySelector('#qwerty').addEventListener('click', (event) => {
   const button = event.target;
-  // Note: 'enter' and 'space' both trigger clicks on any in focus buttons.
-  // blur() removes the focus after click.
+
+  /**
+   * 'Enter' and 'space' both trigger clicks on any in-focus buttons.
+   * Blur() removes the focus after click.
+   */
   button.blur();
   if (button.className === 'key') {
     handleInteraction(button);
@@ -61,13 +77,16 @@ document.addEventListener('keyup', (event) => {
   // Checks for LETTER key press.
   const isLetterKey = /^[a-zA-Z]$/.test(letter);
 
-  // Creates an array of UNUSED key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array)
-  // Note: This array must be generated inside if state so that the list is up-to-date.
+  /**
+   * 'querySelectorAll' returns a NodList, which has to be converted to an array.
+   * This array must be generated here so that the list is up-to-date.
+   */
+  // Creates an array of UNUSED key elements.
   const keyElements = Array.from(document.querySelectorAll('.key'));
   const isUnusedKey = keyElements.find(key => key.innerText === letter) !== undefined;
 
   if (isLetterKey && isUnusedKey) {
-    // Gets matching element from full list of keys.
+    // Gets matching element from the list of unused keys.
     const button = keyElements.filter(element => element.innerText === letter)[0];
     handleInteraction(button);
   }

@@ -2,6 +2,7 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
+
 class Phrase {
   constructor(phrase) {
     this.phrase = phrase.toLowerCase();
@@ -13,8 +14,10 @@ class Phrase {
   addPhraseToDisplay() {
     // Where the phrase will go.
     const targetElement = document.querySelector('#phrase');
+
     // Parent element for adding each 'li'
     const ul = document.createElement('ul');
+
     // Creates each 'li'
     [...this.phrase].forEach((char) => {
       const li = document.createElement('li');
@@ -26,8 +29,10 @@ class Phrase {
       li.innerText = `${char}`;
       ul.appendChild(li);
     });
+
     // Removes existing 'ul' from the DOM
     targetElement.innerHTML = '';
+
     // Adds the new ul.
     targetElement.appendChild(ul);
   }
@@ -48,8 +53,6 @@ class Phrase {
    * @param (string) letter - Letter to display
    */
   showMatchedLetter(letter) {
-    // console.log('showMatchedLetter called: ', letter);
-
     document.querySelectorAll(`.${letter}`).forEach((element) => {
       element.classList.remove('hide');
       element.classList.add('show', 'animated', 'flipInY');

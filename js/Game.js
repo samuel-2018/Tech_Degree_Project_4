@@ -2,19 +2,18 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
+
 class Game {
   constructor() {
     this.missed = 0;
     this.phrases = this.createPhrases();
     this.activePhrase = null;
+
     // Set to false to lockout keyboard presses until 'start' is clicked.
     this.gameReady = false;
 
-    // Sound effects, overlay screen
-    // To use: soundClick.play();
-    this.soundClickRight = new Audio(
-      'sounds/8BIT_RETRO_Coin_Collect_Two_Dual_Note_Fast_Twinkle_mono.wav',
-    );
+    // Sound effects
+    this.soundClickRight = new Audio('sounds/8BIT_RETRO_Coin_Collect_mono.wav');
     this.soundClickWrong = new Audio('sounds/DROP_Designed_mono.wav');
     this.soundWin = new Audio('sounds/VOICE_Girl_4yo_You_Are_The_Winner_01.wav');
     this.soundLose = new Audio('sounds/VOICE_Girl_4yo_Too_Bad_01.wav');
@@ -28,15 +27,8 @@ class Game {
   createPhrases() {
     const phrasesData = [
       'The apple of my eye',
-      'A sight for sore eyes',
       'Busy as a bee',
-      'The Acid Test',
-      'Two peas in a pod',
-      'Fly by the seat of your pants',
       'Saved by the bell',
-      'Dead Ringer',
-      'A Piece of Cake',
-      'An Arm and a Leg',
       'Back to Square One',
       'Cut To The Chase',
     ];
@@ -62,7 +54,10 @@ class Game {
     // Hides the overlay, showing the game screen.
     overlayDiv.style.display = 'none';
 
-    // Note: These two statements can't be chained together. No value would be returned to set the value of 'this.activePhrase'
+    /**
+     * The following two statements can't be chained together.
+     * No value would be returned to set the value of 'this.activePhrase'.
+     */
     // Gets phrase.
     this.activePhrase = this.getRandomPhrase();
     // Displays to user.
@@ -108,9 +103,10 @@ class Game {
     // Clears animation from title (so animation only shows first time)
     document.querySelector('.title').classList.remove('rubberBand');
 
+    // Shows the overlay.
     const overlayDiv = document.querySelector('#overlay');
-    // Shows the overlay, showing the start screen.
     overlayDiv.style.display = '';
+
     if (gameWon) {
       this.soundWin.play();
       document.querySelector('h1').className = 'animated tada';
@@ -125,8 +121,9 @@ class Game {
     // Clears old phrase from game.
     document.querySelector('#phrase > ul').innerHTML = '';
 
-    // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array)
+    // Creates an array of key elements. ('querySelectorAll' returns a NodList, which has to be converted to an array.)
     const keyElements = Array.from(document.querySelectorAll('#qwerty button'));
+
     // Clears classes from buttons and replaces them with 'key'.
     keyElements.forEach(key => (key.className = 'key'));
 
