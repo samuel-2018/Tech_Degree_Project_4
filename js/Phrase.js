@@ -48,11 +48,11 @@ class Phrase {
    * @param (string) letter - Letter to display
    */
   showMatchedLetter(letter) {
-    console.log('showMatchedLetter called: ', letter);
+    // console.log('showMatchedLetter called: ', letter);
 
     document.querySelectorAll(`.${letter}`).forEach((element) => {
       element.classList.remove('hide');
-      element.classList.add('show');
+      element.classList.add('show', 'animated', 'flipInY');
     });
   }
 }

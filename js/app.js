@@ -6,6 +6,13 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
   game = new Game();
   game.startGame();
 });
+
+// On first load, plays sound after 3 seconds: "Let's play!"
+const soundLetsPlay = new Audio('sounds/VOICE_Girl_4yo_Lets_Play_03.wav');
+setTimeout(() => {
+  soundLetsPlay.play();
+}, 3000);
+
 /**
  * Handles onscreen keyboard button clicks
  * @param (HTMLButtonElement) button - The clicked button element
@@ -16,6 +23,7 @@ function handleInteraction(button) {
       try {
         const letter = button.innerText;
         if (game.activePhrase.checkLetter(letter)) {
+          game.soundClickRight.play();
           button.classList.remove('key');
           button.classList.add('chosen');
           game.activePhrase.showMatchedLetter(letter);
@@ -23,6 +31,7 @@ function handleInteraction(button) {
             game.gameOver(true);
           }
         } else {
+          game.soundClickWrong.play();
           button.classList.remove('key');
           button.classList.add('wrong');
           game.removeLife();

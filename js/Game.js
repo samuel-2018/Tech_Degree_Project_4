@@ -9,6 +9,15 @@ class Game {
     this.activePhrase = null;
     // Set to false to lockout keyboard presses until 'start' is clicked.
     this.gameReady = false;
+
+    // Sound effects, overlay screen
+    // To use: soundClick.play();
+    this.soundClickRight = new Audio(
+      'sounds/8BIT_RETRO_Coin_Collect_Two_Dual_Note_Fast_Twinkle_mono.wav',
+    );
+    this.soundClickWrong = new Audio('sounds/DROP_Designed_mono.wav');
+    this.soundWin = new Audio('sounds/VOICE_Girl_4yo_You_Are_The_Winner_01.wav');
+    this.soundLose = new Audio('sounds/VOICE_Girl_4yo_Too_Bad_01.wav');
   }
 
   /**
@@ -18,13 +27,19 @@ class Game {
   // eslint-disable-next-line class-methods-use-this
   createPhrases() {
     const phrasesData = [
-      'Some are born great some achieve greatness and some have greatness thrust upon them',
-      'Brevity is the soul of wit',
-      'Just think happy thoughts and youll fly',
-      'Romeo Romeo wherefore art thou Romeo',
-      'Not all those who wander are lost',
+      'The apple of my eye',
+      'A sight for sore eyes',
+      'Busy as a bee',
+      'The Acid Test',
+      'Two peas in a pod',
+      'Fly by the seat of your pants',
+      'Saved by the bell',
+      'Dead Ringer',
+      'A Piece of Cake',
+      'An Arm and a Leg',
+      'Back to Square One',
+      'Cut To The Chase',
     ];
-
     return phrasesData.map(phrase => new Phrase(phrase));
   }
 
@@ -90,14 +105,21 @@ class Game {
     // Locks out keypresses when overlay is shown.
     this.gameReady = false;
 
+    // Clears animation from title (so animation only shows first time)
+    document.querySelector('.title').classList.remove('rubberBand');
+
     const overlayDiv = document.querySelector('#overlay');
     // Shows the overlay, showing the start screen.
     overlayDiv.style.display = '';
     if (gameWon) {
-      document.querySelector('h1').innerText = 'You Win!';
+      this.soundWin.play();
+      document.querySelector('h1').className = 'animated tada';
+      document.querySelector('h1').innerText = "You're the winner!";
       document.querySelector('#overlay').className = 'win';
     } else {
-      document.querySelector('h1').innerText = 'You Lose!';
+      this.soundLose.play();
+      document.querySelector('h1').className = 'animated flash';
+      document.querySelector('h1').innerText = 'Too bad!';
       document.querySelector('#overlay').className = 'lose';
     }
     // Clears old phrase from game.
