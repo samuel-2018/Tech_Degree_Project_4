@@ -10,36 +10,6 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
   game.startGame();
 });
 
-// /**
-//  * Handles onscreen keyboard button clicks
-//  * @param (HTMLButtonElement) button - The clicked button element
-//  */
-// function handleInteraction(button) {
-//   if (game !== undefined) {
-//     if (game.gameReady) {
-//       try {
-//         const letter = button.innerText;
-//         if (game.activePhrase.checkLetter(letter)) {
-//           game.soundClickRight.play();
-//           button.classList.remove('key');
-//           button.classList.add('chosen');
-//           game.activePhrase.showMatchedLetter(letter);
-//           if (game.checkForWin()) {
-//             game.gameOver(true);
-//           }
-//         } else {
-//           game.soundClickWrong.play();
-//           button.classList.remove('key');
-//           button.classList.add('wrong');
-//           game.removeLife();
-//         }
-//       } catch (err) {
-//         console.log('TypeError: ', err instanceof TypeError);
-//       }
-//     }
-//   }
-// }
-
 // Listens for onscreen keyboard clicks.
 document.querySelector('#qwerty').addEventListener('click', (event) => {
   const button = event.target;
