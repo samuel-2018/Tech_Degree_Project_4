@@ -97,6 +97,34 @@ class Game {
   }
 
   /**
+   * Handles onscreen keyboard button clicks
+   * @param (HTMLButtonElement) button - The clicked button element
+   */
+  handleInteraction(button) {
+    if (this.gameReady) {
+      try {
+        const letter = button.innerText;
+        if (this.activePhrase.checkLetter(letter)) {
+          this.soundClickRight.play();
+          button.classList.remove('key');
+          button.classList.add('chosen');
+          this.activePhrase.showMatchedLetter(letter);
+          if (this.checkForWin()) {
+            this.gameOver(true);
+          }
+        } else {
+          this.soundClickWrong.play();
+          button.classList.remove('key');
+          button.classList.add('wrong');
+          this.removeLife();
+        }
+      } catch (err) {
+        console.log('TypeError: ', err instanceof TypeError);
+      }
+    }
+  }
+
+  /**
    * Displays game over message
    * @param {boolean} gameWon - Whether or not the user won the game
    */

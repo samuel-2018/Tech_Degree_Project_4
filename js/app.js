@@ -10,35 +10,35 @@ document.querySelector('#btn__reset').addEventListener('click', () => {
   game.startGame();
 });
 
-/**
- * Handles onscreen keyboard button clicks
- * @param (HTMLButtonElement) button - The clicked button element
- */
-function handleInteraction(button) {
-  if (game !== undefined) {
-    if (game.gameReady) {
-      try {
-        const letter = button.innerText;
-        if (game.activePhrase.checkLetter(letter)) {
-          game.soundClickRight.play();
-          button.classList.remove('key');
-          button.classList.add('chosen');
-          game.activePhrase.showMatchedLetter(letter);
-          if (game.checkForWin()) {
-            game.gameOver(true);
-          }
-        } else {
-          game.soundClickWrong.play();
-          button.classList.remove('key');
-          button.classList.add('wrong');
-          game.removeLife();
-        }
-      } catch (err) {
-        console.log('TypeError: ', err instanceof TypeError);
-      }
-    }
-  }
-}
+// /**
+//  * Handles onscreen keyboard button clicks
+//  * @param (HTMLButtonElement) button - The clicked button element
+//  */
+// function handleInteraction(button) {
+//   if (game !== undefined) {
+//     if (game.gameReady) {
+//       try {
+//         const letter = button.innerText;
+//         if (game.activePhrase.checkLetter(letter)) {
+//           game.soundClickRight.play();
+//           button.classList.remove('key');
+//           button.classList.add('chosen');
+//           game.activePhrase.showMatchedLetter(letter);
+//           if (game.checkForWin()) {
+//             game.gameOver(true);
+//           }
+//         } else {
+//           game.soundClickWrong.play();
+//           button.classList.remove('key');
+//           button.classList.add('wrong');
+//           game.removeLife();
+//         }
+//       } catch (err) {
+//         console.log('TypeError: ', err instanceof TypeError);
+//       }
+//     }
+//   }
+// }
 
 // Listens for onscreen keyboard clicks.
 document.querySelector('#qwerty').addEventListener('click', (event) => {
@@ -50,7 +50,7 @@ document.querySelector('#qwerty').addEventListener('click', (event) => {
    */
   button.blur();
   if (button.className === 'key') {
-    handleInteraction(button);
+    game.handleInteraction(button);
   }
 });
 
@@ -72,6 +72,6 @@ document.addEventListener('keyup', (event) => {
   if (isLetterKey && isUnusedKey) {
     // Gets matching element from the list of unused keys.
     const button = keyElements.filter(element => element.innerText === letter)[0];
-    handleInteraction(button);
+    game.handleInteraction(button);
   }
 });
