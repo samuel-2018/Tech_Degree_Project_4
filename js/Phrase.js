@@ -10,31 +10,32 @@ class Phrase {
 
   /**
    * Display phrase on game board
+   * (Display will break at words when possible.)
    */
   addPhraseToDisplay() {
     // Where the phrase will go.
-    const targetElement = document.querySelector('#phrase');
+    const targetElement = document.querySelector('#phrase > ul');
 
-    // Parent element for adding each 'li'
-    const ul = document.createElement('ul');
-
-    // Creates each 'li'
+    // Starts the 'ul' for the first word.
+    let html = '<ul>';
     [...this.phrase].forEach((char) => {
-      const li = document.createElement('li');
       if (char === ' ') {
-        li.className = 'space';
+        // Closes the 'ul' for the previous word.
+        html += '</ul>';
+        // Creates an 'li' for the space.
+        html += '<li class="space"> </li>';
+        // Opens the 'ul' for the next word.
+        html += '<ul>';
       } else {
-        li.className = `hide letter ${char}`;
+        // Creates each 'li'.
+        html += `<li class="hide letter ${char}">${char}</li>`;
       }
-      li.innerText = `${char}`;
-      ul.appendChild(li);
     });
-
-    // Removes existing 'ul' from the DOM
-    targetElement.innerHTML = '';
-
-    // Adds the new ul.
-    targetElement.appendChild(ul);
+    // Closes the 'ul' for the last word.
+    html += '</ul>';
+    // Adds an extra 'li' to keep the display aligned evenly.
+    html += '<li class="space"> </li>';
+    targetElement.innerHTML = html;
   }
 
   /**
