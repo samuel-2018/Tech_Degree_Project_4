@@ -35,6 +35,16 @@ class Game {
       'Saved by the bell',
       'Back to Square One',
       'Cut To The Chase',
+      'A Piece of Cake',
+      'An Arm and a Leg',
+      'A Dime a Dozen',
+      'Burst Your Bubble',
+      'Cry Over Spilled Milk',
+      'A sight for sore eyes',
+      'Bring home the bacon',
+      'Bee in your bonnet',
+      'Beat around the bush',
+      'Two peas in a pod',
     ];
     return phrasesData.map(phrase => new Phrase(phrase));
   }
